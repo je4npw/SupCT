@@ -26,7 +26,9 @@ RUN apk update && apk add --no-cache \
     krb5-dev \
     libxslt-dev \
     oniguruma-dev \
-    linux-headers
+    linux-headers \
+    nodejs \
+    npm
 
 # Clear cache
 RUN rm -rf /var/cache/apk/*
