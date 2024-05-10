@@ -28,7 +28,8 @@ RUN apk update && apk add --no-cache \
     oniguruma-dev \
     linux-headers \
     nodejs \
-    npm
+    npm \
+    bash
 
 # Clear cache
 RUN rm -rf /var/cache/apk/*
@@ -39,15 +40,15 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp --with-x
 
 # Install other PHP extensions separately
 RUN docker-php-ext-install pdo_mysql \
-    && docker-php-ext-install mbstring \
-    && docker-php-ext-install exif \
-    && docker-php-ext-install pcntl \
-    && docker-php-ext-install bcmath \
-    && docker-php-ext-install sockets \
-    && docker-php-ext-install gettext \
-    && docker-php-ext-install gmp \
-    && docker-php-ext-install zip \
-    && docker-php-ext-install xsl
+    mbstring \
+    exif \
+    pcntl \
+    bcmath \
+    sockets \
+    gettext \
+    gmp \
+    zip \
+    xsl
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer

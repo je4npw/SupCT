@@ -3,7 +3,7 @@ services:
     app:
         build:
             context: .
-            dockerfile: Dockerfile
+            dockerfile: app.Dockerfile
         restart: unless-stopped
         working_dir: /var/www/
         volumes:
@@ -59,6 +59,16 @@ services:
         image: redis:latest
         networks:
             - laravel
+
+    # npm
+    npm:
+        build:
+            context: .
+            dockerfile: npm.Dockerfile
+        volumes:
+            - ./:/app
+        ports:
+            - "5173:5173"
 
 networks:
     laravel:
