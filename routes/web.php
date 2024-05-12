@@ -4,21 +4,20 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Globals\ConfigController;
 use App\Http\Controllers\MenuItemController as Link;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Dashboard;
+use App\Livewire\Acolhidos;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', Dashboard::class)->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/acolhidos', Acolhidos::class)->middleware(['auth', 'verified'])->name('acolhidos');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    //Menuitem
-    Route::get('/menuitem', [Link::class, 'listItems'])->name('menuitem.listItems');
+    Route::get('/perfil', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/perfil', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/perfil', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 Route::get('/config', [ConfigController::class, 'index'])->name('configuration.index');
