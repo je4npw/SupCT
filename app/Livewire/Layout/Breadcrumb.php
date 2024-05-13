@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\layout;
 
+use App\Livewire\Closure;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
@@ -11,7 +12,7 @@ class Breadcrumb extends Component
     {
         $request = explode('/',request()->path());
 
-        return view('livewire.breadcrumb', compact('request'));
+        return view('livewire.layout.breadcrumb', compact('request'));
 
     }
 }

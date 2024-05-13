@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\layout;
 
+use App\Livewire\Closure;
 use App\Models\MenuItem;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
@@ -22,7 +23,7 @@ class SidebarLink extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('livewire.sidebar-link')->with([
+        return view('livewire.layout.sidebar-link')->with([
             'menuItems' => $this->getLinks()
         ]);
     }
