@@ -1,4 +1,4 @@
-<nav class="flex" aria-label="Breadcrumb">
+<nav class="flex pb-2" aria-label="Breadcrumb">
     <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
         @foreach($request as $req)
             <li>

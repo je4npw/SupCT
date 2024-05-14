@@ -1,3 +1,3 @@
 <div>
-    <h1>Acolhidos</h1>
+   @include('livewire.layout.table')
 </div>
