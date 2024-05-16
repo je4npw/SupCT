@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="pt_BR}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 
     <!-- The content -->
     <main>
-        <div class="p-4 sm:ml-64">
+        <div class="p-4 md:ml-64">
             <div class="p-4 mt-10">
 {{--                <livewire:layout.breadcrumb />--}}
                 {{ $slot }}

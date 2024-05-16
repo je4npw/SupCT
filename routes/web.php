@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Globals\ConfigController;
-use App\Http\Controllers\MenuItemController as Link;
 use App\Livewire\Usuario;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Dashboard;
@@ -17,7 +16,7 @@ Route::get('/acolhidos', Acolhidos::class)->middleware(['auth', 'verified'])->na
 Route::get('/usuario', Usuario::class)->middleware(['auth', 'verified'])->name('usuario');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/perfil', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/perfil', [ProfileController::class, 'edit'])->name('perfil.edit');
     Route::patch('/perfil', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/perfil', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });

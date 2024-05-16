@@ -13,8 +13,9 @@
             alt="user photo"
         />
     </button>
-    <div class="hidden z-50 my-4 w-56 text-base list-none bg-white rounded-xl border border-red-500 divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
-         id="dropdown"
+    <div
+        class="hidden z-50 my-4 w-56 text-base list-none bg-white rounded-xl border border-red-500 divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
+        id="dropdown"
     >
         <div class="py-3 px-4">
               <span class="block text-sm font-semibold text-gray-900 dark:text-red-500">
@@ -25,19 +26,21 @@
         </div>
         <ul class="py-1 text-gray-700 dark:text-gray-300" aria-labelledby="dropdown">
             <li>
-                <a href="#"
-                   class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white"
+                <a href="{{route('usuario')}}"
+                   wire:navigate
+                   class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-300 dark:hover:text-white"
                 >Meu Perfil</a>
             </li>
             <li>
                 <a href="#"
-                   class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white"
+                   class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-300 dark:hover:text-white"
                 >Configurações</a>
             </li>
         </ul>
-        <ul class="py-1 text-gray-700 dark:text-gray-300" aria-labelledby="dropdown" >
+        <ul class="py-1 text-gray-700 dark:text-gray-300" aria-labelledby="dropdown">
             <li>
-                <a href="#" class="flex items-center py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                <a href="#"
+                   class="flex items-center py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                     <i class="fa fa-heart pr-4"></i>
                     My likes
                 </a>
@@ -74,7 +77,7 @@
                 </a>
             </li>
         </ul>
-        <ul class="py-1 text-gray-700 dark:text-gray-300" aria-labelledby="dropdown" >
+        <ul class="py-1 text-gray-700 dark:text-gray-300" aria-labelledby="dropdown">
             <li>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
