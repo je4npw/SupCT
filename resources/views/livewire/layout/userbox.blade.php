@@ -1,14 +1,14 @@
 <div>
     <button
         type="button"
-        class="flex mx-3 text-sm bg-gray-800 rounded-lg md:mr-0 focus:ring-4 focus:ring-green-300 dark:focus:ring-red-500"
+        class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-green-300 dark:focus:ring-red-500"
         id="user-menu-button"
         aria-expanded="false"
         data-dropdown-toggle="dropdown"
     >
         <span class="sr-only">Abrir menu de usuário</span>
         <img
-            class="w-8 h-8 rounded-lg"
+            class="w-8 h-8 rounded-full"
             src="https://github.com/je4npw.png"
             alt="user photo"
         />
@@ -27,7 +27,6 @@
         <ul class="py-1 text-gray-700 dark:text-gray-300" aria-labelledby="dropdown">
             <li>
                 <a href="{{route('usuario')}}"
-                   wire:navigate
                    class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-300 dark:hover:text-white"
                 >Meu Perfil</a>
             </li>
