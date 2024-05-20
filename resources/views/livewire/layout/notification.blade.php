@@ -6,7 +6,7 @@
     >
         <span class="sr-only">Notificações</span>
         <!-- Bell icon -->
-        <i class="fa fa-bell w-6 h-6 p-1 text-blue-600 dark:text-blue-500" ></i>
+        <i class="fa fa-bell w-6 h-6 p-1 text-amber-500" ></i>
     </button>
     <!-- Dropdown menu -->
     <div

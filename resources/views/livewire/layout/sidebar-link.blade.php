@@ -5,7 +5,7 @@
                 <a href="{{ route($item['item_link']) }}"
                    wire:navigate
                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                    <i class="text-red-500 fa {{$item['fa_icon']}}"></i>
+                    <i class="text-amber-500 fa {{$item['fa_icon']}}"></i>
                     <span class="ms-3">{{$item['item_name']}}</span>
                 </a>
             </li>
@@ -18,7 +18,7 @@
                onclick="event.preventDefault();
                    this.closest('form').submit();"
                class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                <i class="text-red-500 fa fa-sign-out"></i>
+                <i class="text-amber-500 fa fa-sign-out"></i>
                 <span class="ms-3">Sair</span>
             </a>
         </form>

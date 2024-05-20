@@ -1,7 +1,7 @@
 <div>
     <button
         type="button"
-        class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-green-300 dark:focus:ring-red-500"
+        class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-green-300 dark:focus:ring-amber-500"
         id="user-menu-button"
         aria-expanded="false"
         data-dropdown-toggle="dropdown"
@@ -14,11 +14,11 @@
         />
     </button>
     <div
-        class="hidden z-50 my-4 w-56 text-base list-none bg-white rounded-xl border border-red-500 divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
+        class="hidden z-50 my-4 w-56 text-base list-none bg-white rounded-xl border border-amber-500 divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
         id="dropdown"
     >
         <div class="py-3 px-4">
-              <span class="block text-sm font-semibold text-gray-900 dark:text-red-500">
+              <span class="block text-sm font-semibold text-gray-900 dark:text-amber-500">
                   {{Auth::user()->name}}</span>
             <span class="block text-sm text-gray-900 truncate dark:text-white">
                          [ {{Auth::user()->email}} ]
