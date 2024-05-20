@@ -9,7 +9,7 @@
         <span class="sr-only">Abrir menu de usuário</span>
         <img
             class="w-8 h-8 rounded-full"
-            src="https://github.com/je4npw.png"
+            src="avatars/{{$avatar}}"
             alt="user photo"
         />
     </button>
