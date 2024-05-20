@@ -1,20 +1,59 @@
 <div>
     <section class="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md">
         <h2 class="mb-6 text-2xl font-bold text-gray-900 dark:text-amber-500">Editar Usuário</h2>
-
-        <div class="flex flex-col items-center justify-center mb-6">
-            <div class="relative w-48 h-48 mb-4">
-                <img class="w-full h-full border-4 ring-4 border-amber-500 rounded-full shadow-lg object-cover"
-                     src="{{$avatar}}" alt="Imagem de {{$name}}">
+        <form wire:submit.prevent="saveAvatar">
+            <div class="flex flex-col items-center justify-center mb-6">
+                <div class="relative w-48 h-48 mb-4">
+                    @if ($photo)
+                        <img
+                            class="w-full h-full border-4 ring-4 border-amber-500 rounded-full shadow-lg object-cover"
+                            src="{{ $photo->temporaryUrl() }}"
+                            alt="Imagem de {{$name}}"
+                        >
+                    @else
+                    <img class="w-full h-full border-4 ring-4 border-amber-500 rounded-full shadow-lg object-cover"
+                         src="avatars/{{$avatar}}" alt="Imagem de {{$name}}">
+                    @endif
+                </div>
+                <div>
+                    <div class="flex items-center">
+                        <input
+                            class="block w-full text-xs text-amber-500 border border-gray-300 rounded-l-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                            id="small_size"
+                            type="file"
+                            wire:model="photo"
+                        >
+                        <button
+                            @if(!$photo) disabled @else enabled @endif
+                            type="submit"
+                            class="text-white bg-gray-50 rounded-r-lg text-sm px-5 py-2.5 dark:bg-gray-700"
+                        >
+                            <i class="fa fa-upload text-amber-500"></i>
+                        </button>
+                    </div>
+                    @if($toast)
+                        <div id="toast-success" class="fixed top-4 right-4 z-50 flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
+                            <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
+                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+                                </svg>
+                                <span class="sr-only">Fechar</span>
+                            </div>
+                            <div class="ms-3 text-sm font-normal">Avatar atualizado com sucesso.</div>
+                            <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-success" aria-label="Close" onclick="document.getElementById('toast-success').remove()">
+                                <span class="sr-only">Close</span>
+                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                </svg>
+                            </button>
+                        </div>
+                    @endif
+                    @error('photo')
+                    <span class="error">{{ $message }}</span>
+                    @enderror
+                </div>
             </div>
-            <div>
-                <input
-                    class="block w-full mb-5 text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                    id="small_size"
-                    type="file"
-                >
-            </div>
-        </div>
+        </form>
 
         <form wire:submit.prevent="save">
             <div class="flex flex-row gap-2">
