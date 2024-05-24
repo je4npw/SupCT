@@ -31,7 +31,7 @@
     <main>
         <div class="p-4 md:ml-64">
             <div class="p-4 mt-10">
-{{--                <livewire:layout.breadcrumb />--}}
+                <livewire:layout.breadcrumb />
                 {{ $slot }}
             </div>
         </div>
