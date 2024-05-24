@@ -51,7 +51,13 @@ class Usuario extends Component
             'id' => $arr->id,
             'name' => $arr->name,
             'email' => $arr->email,
-            'avatar' => $arr->avatar
+            'avatar' => $arr->avatar,
+            'birth_date' => $arr->birth_date,
+            'address' => $arr->address,
+            'address_number' => $arr->address_number,
+            'neighborhood' => $arr->neighborhood,
+            'cep' => $arr->cep,
+            'cpf' => $arr->cpf,
         ]);
     }
 }
