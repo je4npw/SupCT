@@ -31,7 +31,7 @@
                 >Meu Perfil</a>
             </li>
             <li>
-                <a href="#"
+                <a href="{{route('usuario')}}"
                    class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-300 dark:hover:text-white"
                 >Configurações</a>
             </li>
@@ -40,15 +40,15 @@
             <li>
                 <a href="#"
                    class="flex items-center py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                    <i class="fa fa-heart pr-4"></i>
-                    My likes
+                    <i class="fa fa-file pr-4"></i>
+                    Documentos Dinâmicos
                 </a>
             </li>
             <li>
                 <a href="#"
                    class="flex items-center py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                    <i class="fa fa-archive pr-4"></i>
-                    Collections
+                    <i class="fa fa-id-card pr-4"></i>
+                    Consultar CPF
                 </a>
             </li>
             <li>
@@ -57,22 +57,9 @@
                     class="flex justify-between items-center py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                 >
                   <span class="flex items-center">
-                    <i class="fa fa-fire pr-4"></i>
-                    Pro version
+                    <i class="fa fa-calendar-alt pr-4"></i>
+                    Minha Agenda
                   </span>
-                    <svg
-                        aria-hidden="true"
-                        class="w-5 h-5 text-gray-400"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                            fill-rule="evenodd"
-                            d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                            clip-rule="evenodd"
-                        ></path>
-                    </svg>
                 </a>
             </li>
         </ul>
