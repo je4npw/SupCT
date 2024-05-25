@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Gabrielmoura\LaravelCep\Cep;
 
 class Usuario extends Component
 {
@@ -22,10 +23,14 @@ class Usuario extends Component
     public $photo;
 
     public $toast = false;
+
+    #[Validate('required|min:5')]
+    public $cepcode = '';
     public function save()
     {
 
     }
+
 
     public function saveAvatar() :string
     {
@@ -58,6 +63,7 @@ class Usuario extends Component
             'neighborhood' => $arr->neighborhood,
             'cep' => $arr->cep,
             'cpf' => $arr->cpf,
+            'rg' => $arr->rg,
         ]);
     }
 }
