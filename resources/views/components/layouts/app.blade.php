@@ -14,6 +14,7 @@
     @vite(['resources/css/app.css','resources/js/app.js'])
 </head>
 <body class="font-sans antialiased">
+<livewire:toasts/>
 <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
     <header>
         <livewire:layout.navigation/>
@@ -24,7 +25,7 @@
     <main>
         <div class="p-4 md:ml-64">
             <div class="p-4 mt-10">
-                <livewire:layout.breadcrumb />
+                <livewire:layout.breadcrumb/>
                 {{ $slot }}
             </div>
         </div>

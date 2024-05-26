@@ -20,6 +20,23 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'avatar',
+        'birth_date',
+        'address',
+        'address_number',
+        'cep',
+        'neighborhood',
+        'cpf',
+        'rg',
+        'council_registry',
+        'main_phone',
+        'other_phone',
+        'user_type',
+        'office_id',
+        'permission_group_id',
+        'bank',
+        'bank_agency',
+        'bank_account'
     ];
 
     /**

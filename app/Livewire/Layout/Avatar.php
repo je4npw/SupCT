@@ -8,10 +8,13 @@ use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Usernotnull\Toast\Concerns\WireToast;
 
 class Avatar extends Component
 {
     use WithFileUploads;
+
+    use WireToast;
 
     #[Validate('image|max:1024')]
     public $photo;
@@ -26,8 +29,7 @@ class Avatar extends Component
 
             $ext = $this->photo->getClientOriginalExtension();
 
-            $filename = Str::uuid()  . '.' . $ext;
-
+            $filename = Str::uuid() . '.' . $ext;
 
             if (DB::table('users')->where('id', Auth::user()->id)->update(['avatar' => $filename])) {
 
@@ -35,11 +37,15 @@ class Avatar extends Component
 
             }
 
-            $this->dispatch('showAlert', 'success', 'Avatar de usuário alterado com sucesso!', true, '500');
+            toast()
+                ->success('A imagem de usuário foi alterada.', '🆗 Sucesso:')
+                ->push();
 
         } catch (\Exception $e) {
 
-            $this->dispatch('showAlert', 'danger', 'Houve um erro! Avatar de usuário não foi alterado...', true, 500);
+            toast()
+                ->warning('Houve um erro ao alterar a imagem de usuário.', 'Atenção:')
+                ->push();
 
         }
 
