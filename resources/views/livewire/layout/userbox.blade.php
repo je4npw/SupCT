@@ -9,7 +9,7 @@
         <span class="sr-only">Abrir menu de usuário</span>
         <img
             class="w-8 h-8 rounded-full"
-            src="avatars/{{$avatar}}"
+            src="{{ asset('avatars/' . basename($avatar)) }}"
             alt="user photo"
         />
     </button>
@@ -26,12 +26,12 @@
         </div>
         <ul class="py-1 text-gray-700 dark:text-gray-300" aria-labelledby="dropdown">
             <li>
-                <a href="{{route('usuario')}}" wire:navigate
+                <a href="{{ route('usuario', ['userId' => Auth::user()->id]) }}" wire:navigate
                    class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-300 dark:hover:text-white"
                 >Meu Perfil</a>
             </li>
             <li>
-                <a href="{{route('usuario')}}"
+                <a href="#"
                    class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-300 dark:hover:text-white"
                 >Configurações</a>
             </li>

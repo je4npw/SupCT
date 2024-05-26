@@ -2,68 +2,51 @@
 
 namespace App\Livewire;
 
-use App\Http\Controllers\UserController as UC;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Livewire\Attributes\Validate;
+use App\Models\User;
 use Livewire\Component;
-use Livewire\WithFileUploads;
-use Gabrielmoura\LaravelCep\Cep;
 
 class Usuario extends Component
 {
-    use WithFileUploads;
-
     public string $labelStyle="block mb-2 text-sm font-medium text-gray-900 dark:text-white";
     public string $inputStyle="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500";
-    public string $saveButton="";
-    public string $cancelButton="";
+    public $activeTab = 'basic';
 
-    #[Validate('image|max:1024')]
-    public $photo;
+    // form properties
+    public $avatar;
+    public $name;
+    public $birth_date;
+    public $address;
+    public $address_number;
+    public $cep;
+    public $neighborhood;
+    public $cpf;
+    public $rg;
+    public $email;
 
-    public $toast = false;
 
-    #[Validate('required|min:5')]
-    public $cepcode = '';
     public function save()
     {
 
     }
 
-
-    public function saveAvatar() :string
+    public function mount($userId)
     {
-        $ext = $this->photo->getClientOriginalExtension();
+        $user = User::find($userId);
 
-        $filename = strtolower( str_replace(" ", "_", Auth::user()->name) ) . '.' . $ext;
+        $this->avatar = $user->avatar;
 
-        DB::table('users')->where('id', Auth::user()->id)->update(['avatar' => $filename]);
-
-        $this->photo->storePubliclyAs(path: 'avatars', name: $filename);
-
-        return $this->toast = true;
+        $this->name = $user->name;
     }
+
+    public function switchTab($tab)
+    {
+        $this->activeTab = $tab;
+    }
+
     public function render()
     {
-        $user = new UC();
 
-        $userId = Auth::user()->id;
+        return view('livewire.usuario');
 
-        $arr = $user->getById($userId);
-
-        return view('livewire.usuario')->with([
-            'id' => $arr->id,
-            'name' => $arr->name,
-            'email' => $arr->email,
-            'avatar' => $arr->avatar,
-            'birth_date' => $arr->birth_date,
-            'address' => $arr->address,
-            'address_number' => $arr->address_number,
-            'neighborhood' => $arr->neighborhood,
-            'cep' => $arr->cep,
-            'cpf' => $arr->cpf,
-            'rg' => $arr->rg,
-        ]);
     }
 }
