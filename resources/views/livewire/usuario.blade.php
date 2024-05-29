@@ -10,7 +10,7 @@
             'content' => "p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full",
             'cancelBtn' => "focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900",
             'submitBtn' => "focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800",
-            'cepBtn' => "text-white absolute end-0.5 bottom-0.5 bg-amber-500 hover:bg-amber-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            'cepBtn' => "text-white absolute end-0.5 bottom-0.5 bg-amber-900 hover:bg-amber-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-amber-500 dark:hover:bg-gray-500 dark:focus:ring-amber-800"
         ];
         $icons = ['basic' => 'user-pen', 'document' => 'address-card', 'contact' => 'paper-plane', 'groups_permissions' => 'people-group', 'bank_data' => 'credit-card']
     @endphp
@@ -59,29 +59,6 @@
                                 >
                             </div>
 
-                            <div class="lg:col-span-1">
-                                <label for="address" class="{{ $style['label'] }}">Endereço</label>
-                                <input
-                                    type="text"
-                                    wire:model="address"
-                                    id="address"
-                                    class="{{ $style['input'] }}"
-                                    placeholder="Rua Fulano de Tal"
-                                    autocomplete="address"
-                                >
-                            </div>
-
-                            <div class="lg:col-span-1">
-                                <label for="address_number" class="{{ $style['label'] }}">Número</label>
-                                <input
-                                    type="number"
-                                    wire:model="address_number"
-                                    id="address_number"
-                                    class="{{ $style['input'] }}"
-                                    placeholder="333"
-                                >
-                            </div>
-
                             <div>
                                 <label for="cep" class="{{ $style['label'] }}">CEP</label>
                                 <div class="relative">
@@ -101,6 +78,29 @@
                                 </div>
                             </div>
 
+                            <div class="lg:col-span-1">
+                                <label for="address" class="{{ $style['label'] }}">Endereço</label>
+                                <input
+                                    type="text"
+                                    wire:model="address"
+                                    id="address"
+                                    class="{{ $style['input'] }}"
+                                    placeholder="Seu endereço"
+                                    autocomplete="address"
+                                >
+                            </div>
+
+                            <div class="lg:col-span-1">
+                                <label for="address_number" class="{{ $style['label'] }}">Número</label>
+                                <input
+                                    type="number"
+                                    wire:model="address_number"
+                                    id="address_number"
+                                    class="{{ $style['input'] }}"
+                                    placeholder="333"
+                                >
+                            </div>
+
                             <div>
                                 <label for="neighborhood" class="{{ $style['label'] }}">Bairro</label>
                                 <input
@@ -108,32 +108,37 @@
                                     wire:model="neighborhood"
                                     id="neighborhood"
                                     class="{{ $style['input'] }}"
-                                    placeholder="Vila Blablá"
+                                    placeholder="Seu bairro"
                                 >
                             </div>
 
                             <div>
-                                <label for="city" class="{{ $style['label'] }}">Cidade</label>
-                                <input
-                                    type="text"
-                                    wire:model="city"
-                                    id="city"
+                                <label for="uf" class="{{ $style['label'] }}">Estado</label>
+                                <select
+                                    wire:model.change="uf"
+                                    id="uf"
                                     class="{{ $style['input'] }}"
-                                    placeholder="Joinville"
-                                />
+                                >
+                                    <option>Selecione um estado</option>
+                                    @foreach($states as $state)
+                                        <option value={{$state['id']}}>{{$state['name']}}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
                             <div>
-                                <label for="uf" class="{{ $style['label'] }}">Estado</label>
-                                <input
-                                    type="text"
-                                    wire:model="uf"
-                                    id="uf"
+                                <label for="city" class="{{ $style['label'] }}">Cidade</label>
+                                <select
+                                    wire:model="city"
+                                    id="city"
                                     class="{{ $style['input'] }}"
-                                    placeholder="Santa Catarina"
-                                />
+                                >
+                                    <option value="">Selecione uma cidade</option>
+                                    @foreach($cities as $c)
+                                        <option value={{$c['id']}}>{{$c['name']}}</option>
+                                    @endforeach
+                                </select>
                             </div>
-
                         </div>
                     @endif
                     @if($activeTab === 'document')
@@ -321,6 +326,7 @@
                 </button>
                 <button
                     type="submit"
+                    wire:click="save"
                     class="{{ $style['submitBtn'] }}"
                 >
                     Salvar

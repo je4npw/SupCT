@@ -11,6 +11,11 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    public function address()
+    {
+        return $this->belongsTo(Address::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -22,10 +27,6 @@ class User extends Authenticatable
         'password',
         'avatar',
         'birth_date',
-        'address',
-        'address_number',
-        'cep',
-        'neighborhood',
         'cpf',
         'rg',
         'council_registry',
@@ -36,7 +37,8 @@ class User extends Authenticatable
         'permission_group_id',
         'bank',
         'bank_agency',
-        'bank_account'
+        'bank_account',
+        'address_id'
     ];
 
     /**
