@@ -60,21 +60,18 @@
                             </div>
 
                             <div>
-                                <label for="cep" class="{{ $style['label'] }}">CEP</label>
+                                <label for="cep" class="{{ $style['label'] }}">CEP
+                                    <span class="text-xs">(pesquisa automática)</span>
+                                </label>
                                 <div class="relative">
                                     <input type="search"
                                            id="cep"
-                                           wire:model="cep"
+                                           wire:model.blur="cep"
                                            x-mask="99999-999"
                                            class="{{$style['input']}}"
                                            placeholder="Digite o CEP"
                                            required
                                     />
-                                    <button type="button"
-                                            wire:click="searchCep"
-                                            class="{{$style['cepBtn']}}">
-                                        <i class="fa fa-search"></i>
-                                    </button>
                                 </div>
                             </div>
 
@@ -119,7 +116,6 @@
                                     id="uf"
                                     class="{{ $style['input'] }}"
                                 >
-                                    <option>Selecione um estado</option>
                                     @foreach($states as $state)
                                         <option value={{$state['id']}}>{{$state['name']}}</option>
                                     @endforeach
@@ -129,11 +125,10 @@
                             <div>
                                 <label for="city" class="{{ $style['label'] }}">Cidade</label>
                                 <select
-                                    wire:model="city"
+                                    wire:model.change="city"
                                     id="city"
                                     class="{{ $style['input'] }}"
                                 >
-                                    <option value="">Selecione uma cidade</option>
                                     @foreach($cities as $c)
                                         <option value={{$c['id']}}>{{$c['name']}}</option>
                                     @endforeach

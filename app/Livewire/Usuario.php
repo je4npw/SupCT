@@ -2,12 +2,14 @@
 
 namespace App\Livewire;
 
+use App\Models\Address;
 use App\Models\City;
 use App\Models\State;
 use App\Models\User;
+use Gabrielmoura\LaravelCep\Cep;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Exception;
 
 class Usuario extends Component
 {
@@ -21,19 +23,20 @@ class Usuario extends Component
     public $cep;
     public $neighborhood;
     public $city;
-    public $uf;
+    public $uf = 0;
     public $cpf;
     public $rg;
     public $email;
+
+    public $addressId;
     public $city_name;
     public $state_name;
     public $states = [];
     public $cities = [];
 
-
     public function save()
     {
-
+        // Implement the save logic here
     }
 
     public function mount($userId)
@@ -41,19 +44,18 @@ class Usuario extends Component
         try {
             $user = User::findOrFail($userId);
 
-            $userAddress = $user->address()->first();
+            $this->addressId = $user->address()->first();
 
             $this->states = State::all();
-
             $this->cities = $this->uf ? City::where('state_id', $this->uf)->get() : [];
 
             $this->fill([
                 'avatar' => $user->avatar,
                 'name' => $user->name,
                 'birth_date' => $user->birth_date,
-                'address' => $userAddress ? $userAddress->address : '',
-                'address_number' => $userAddress ? $userAddress->address_number : '',
-                'neighborhood' => $userAddress ? $userAddress->neighborhood : '',
+                'address' => $this->addressId ? $this->addressId->address : '',
+                'address_number' => $this->addressId ? $this->addressId->address_number : '',
+                'neighborhood' => $this->addressId ? $this->addressId->neighborhood : '',
                 'uf' => $this->uf,
                 'city' => $this->city,
                 'cpf' => $user->cpf,
@@ -70,47 +72,70 @@ class Usuario extends Component
                 'bank_account' => $user->bank_account
             ]);
         } catch (ModelNotFoundException $e) {
-            // Lida com o caso em que o usuário não foi encontrado
             session()->flash('error', 'Usuário não encontrado');
             toast()->warning('Usuário não encontrado', 'Atenção')->push();
-        } catch (\Exception $e) {
-            // Lida com outros tipos de exceções
+        } catch (Exception $e) {
             session()->flash('error', 'Ocorreu um erro ao buscar os dados do usuário');
             toast()->debug('Erro ao buscar usuário')->push();
+        }
+    }
 
+    public function updatedCity($value)
+    {
+        try {
+            $res = City::findOrFail($value);
+            $this->city = $res->id;
+            $this->city_name = $res->name;
+        } catch (ModelNotFoundException $e) {
+            session()->flash('error', 'Cidade não encontrada');
+            toast()->warning('Cidade não encontrada', 'Atenção')->push();
+        } catch (Exception $e) {
+            session()->flash('error', 'Ocorreu um erro ao buscar a cidade');
+            toast()->debug('Erro ao buscar cidade')->push();
         }
     }
 
     public function updatedUf($value)
     {
-        $this->cities = City::where('state_id', $value)->get();
-        $this->city = '';
-        $this->city_name = '';
+        try {
+            $this->cities = City::where('state_id', $value)->get();
+            $this->city = '';
+            $this->city_name = '';
+        } catch (ModelNotFoundException $e) {
+            session()->flash('error', 'Estado não encontrado');
+            toast()->warning('Estado não encontrado', 'Atenção')->push();
+        } catch (Exception $e) {
+            session()->flash('error', 'Ocorreu um erro ao buscar estados');
+            toast()->debug('Erro ao buscar estados')->push();
+        }
     }
 
-    public function searchCep()
+    public function updatedCep($value)
     {
-//        try {
-//
-//            if ($this->cep) {
-//
-//                $cep = Cep::find($this->cep);
-//
-//                $this->fill([
-//                    'address' => $cep->logradouro,
-//                    'neighborhood' => $cep->bairro,
-//                    'city' => $cep->localidade,
-//                    'uf' => $cep->uf,
-//                ]);
-//
-//            }
-//
-//        } catch (\JsonException $e) {
-//
-//            toast()->debug($e)->push();
-//
-//        }
+        try {
+            $cep = Cep::find($value);
 
+            if (is_object($cep)) {
+                $state = State::where('uf', $cep->uf)->first();
+                $city = City::where('name', $cep->localidade)->first();
+
+                if ($state && $city) {
+                    $this->states = State::all();
+                    $this->cities = City::where('state_id', $state->id)->get();
+
+                    $this->fill([
+                        'address' => $cep->logradouro,
+                        'neighborhood' => $cep->bairro,
+                        'uf' => $state->id,
+                        'city' => $city->id
+                    ]);
+                } else {
+                    session()->flash('error', 'Estado ou cidade não encontrados');
+                }
+            }
+        } catch (Exception $e) {
+            session()->flash('error', 'Ocorreu um erro ao buscar dados do CEP informado');
+        }
     }
 
     public function switchTab($tab): void
@@ -120,11 +145,10 @@ class Usuario extends Component
 
     public function render()
     {
-        if (!empty($this->uf)){
+        if (!empty($this->uf)) {
             $this->cities = City::where('state_id', $this->uf)->get();
         }
 
         return view('livewire.usuario');
-
     }
 }
