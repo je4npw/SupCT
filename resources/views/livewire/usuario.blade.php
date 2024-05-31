@@ -112,7 +112,7 @@
                             <div>
                                 <label for="uf" class="{{ $style['label'] }}">Estado</label>
                                 <select
-                                    wire:model.change="uf"
+                                    wire:model="uf"
                                     id="uf"
                                     class="{{ $style['input'] }}"
                                 >
@@ -125,7 +125,7 @@
                             <div>
                                 <label for="city" class="{{ $style['label'] }}">Cidade</label>
                                 <select
-                                    wire:model.change="city"
+                                    wire:model="city"
                                     id="city"
                                     class="{{ $style['input'] }}"
                                 >
