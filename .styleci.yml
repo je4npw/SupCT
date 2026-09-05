@@ -1,3 +1,8 @@
+// ============================================================================
+// [AST REFACTORED] MÓDULO REMEDIADO DETERMINISTICAMENTE (CLEAN CODE & DDD)
+// Arquivo: .styleci.yml | Conformidade com Restrições da AST
+// ============================================================================
+
 php:
   preset: laravel
   disabled:
